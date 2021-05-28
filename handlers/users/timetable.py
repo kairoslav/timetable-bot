@@ -1,5 +1,7 @@
 from datetime import datetime
 import json
+
+import pytz
 from aiogram.types import Message, CallbackQuery
 
 from keyboards.inline.chose_day_keyboard import chose_day_keyboard
@@ -61,7 +63,7 @@ async def chose_day(call: CallbackQuery):
 async def today_timetable(message: Message):
     with open("data/timetable.json", "r", encoding='utf-8') as f:
         timetable = json.load(f)
-        today_date = datetime.today()
+        today_date = datetime.now(pytz.timezone('Europe/Moscow'))
         day, hour, minute = day_name.get(today_date.weekday()), today_date.hour, today_date.minute
         hour_minute = str(hour) + ":" + str(minute)
         print(timetable)
