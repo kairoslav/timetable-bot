@@ -66,6 +66,7 @@ async def today_timetable(message: Message):
         today_date = datetime.now(pytz.timezone('Europe/Moscow'))
         day, hour, minute = day_name.get(today_date.weekday()), today_date.hour, today_date.minute
         hour_minute = str(hour) + ":" + str(minute)
+
         print(timetable)
         for day_of_week in timetable:
             if day_of_week.get("day") == day:
@@ -85,7 +86,7 @@ async def class_now(message: Message):
     print(message.chat.full_name)
     with open("data/timetable.json", "r", encoding='utf-8') as f:
         timetable = json.load(f)
-    today_date = datetime.today()
+    today_date = datetime.now(pytz.timezone('Europe/Moscow'))
     day, hour, minute = day_name.get(today_date.weekday()), today_date.hour, today_date.minute
     if minute // 10 == 0:
         minute = "0" + str(minute)
